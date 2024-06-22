@@ -75,7 +75,8 @@ async def main():
                     debug_fuse=options.debug_fuse,
                     reverse=options.reverse,
                     updates=not options.no_updates,
-                    fsname=options.fsname)
+                    fsname=options.fsname,
+                    additional_fuse_options=options.fuse_options)
 
     elif options.download:
         await download(await client(),
@@ -157,6 +158,9 @@ def parse_args():
 
     parser.add_argument('--json', action='store_true', default=False,
                         help='json output. Default: no')
+
+    parser.add_argument('--fuse-options', action='append', default=[],
+                        help='pass FUSE options to FUSE when mounting', type=str)
 
     return [parser, parser.parse_args()]
 

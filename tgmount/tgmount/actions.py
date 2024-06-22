@@ -97,9 +97,11 @@ def create_new_files_handler(client: TelegramFsClient, telegram_fs, entity: Enti
 
 
 async def mount(client, id, destination: str, offset_id=0, limit=None,
-                filter_music=False, debug_fuse=False, reverse=False, updates=False, fsname="tgfs"):
+                filter_music=False, debug_fuse=False, reverse=False, updates=False, fsname="tgfs", additional_fuse_options=None):
     pyfuse3_asyncio.enable()
     fuse_options = set(pyfuse3.default_options)
+    if additional_fuse_options is not None:
+        fuse_options.update(additional_fuse_options)
     fuse_options.add('fsname=' + fsname)
 
     if debug_fuse:
@@ -130,7 +132,8 @@ async def mount(client, id, destination: str, offset_id=0, limit=None,
     telegram_fs = TelegramFsAsync()
 
     for msg, dh in zip(messages, documents_handles):
-        telegram_fs.add_file(msg, dh)
+        telegram_fs.add_file_no_update_index(msg, dh)
+    telegram_fs.update_index()
 
     if updates:
         client.add_event_handler(
