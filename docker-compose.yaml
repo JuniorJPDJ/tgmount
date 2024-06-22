@@ -6,7 +6,8 @@
 
 services:
   tgmount:
-    build: .
+    # build: .
+    image: ghcr.io/juniorjpdj/tgmount
     privileged: true
     volumes:
       - # Directory where session will be stored
