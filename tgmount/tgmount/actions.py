@@ -119,7 +119,7 @@ def create_new_files_handler(client: TelegramFsClient, telegram_fs, entity: Enti
 
             async with aiohttp.ClientSession() as sess:
                 for new_file_webhook_url in new_file_webhook_urls:
-                    async with sess.post(new_file_webhook_url, data=data) as resp:
+                    async with sess.post(new_file_webhook_url, json=data) as resp:
                         logging.debug(f'new file hook response code: {resp.status}')
 
     return new_files_handler
@@ -162,7 +162,7 @@ async def mount(client, id, destination: str, offset_id=0, limit=None,
     telegram_fs = TelegramFsAsync()
 
     for msg, dh in zip(messages, documents_handles):
-        telegram_fs.add_file_no_update_index(msg, dh)
+        telegram_fs.add_file(msg, dh, update_index=False)
     telegram_fs.update_index()
 
     if updates:

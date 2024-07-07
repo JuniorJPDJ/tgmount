@@ -95,12 +95,7 @@ class TelegramFsAsync(pyfuse3.Operations):
 
         self._inodes = list(self._files.keys())
 
-    def add_file(self, msg: Message, doc: DocumentHandle) -> TgfsFile:
-        f = self.add_file_no_update_index(msg, doc)
-        self.update_index()
-        return f
-
-    def add_file_no_update_index(self, msg: Message, doc: DocumentHandle) -> TgfsFile:
+    def add_file(self, msg: Message, doc: DocumentHandle, update_index=True) -> TgfsFile:
         inode = self._last_inode + 1
 
         attrs = create_attributes_from_doc(doc.document, inode)
@@ -108,6 +103,10 @@ class TelegramFsAsync(pyfuse3.Operations):
 
         self._files[inode] = new_file
         self._last_inode = inode
+
+        if update_index:
+            self.update_index()
+
         return new_file
 
     @exception_handler
