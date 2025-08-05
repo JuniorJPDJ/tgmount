@@ -4,4 +4,4 @@ pysocks==1.7.1
 funcy==2.0.0
 pyfuse3==3.4.0
 tqdm==4.67.1
-aiohttp[speedups]==3.12.14
+aiohttp[speedups]==3.12.15
