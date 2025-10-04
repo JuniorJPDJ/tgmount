@@ -43,6 +43,7 @@ COPY        --chown=nobody:nogroup tgmount .
 USER        nobody
 WORKDIR     /app/data
 STOPSIGNAL  SIGINT
+ENV         PYTHONUNBUFFERED=1
 
 HEALTHCHECK --interval=5m --timeout=1m --start-period=2m --retries=5 \
     CMD mountpoint -q /app/data/mnt
