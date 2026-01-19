@@ -12,6 +12,8 @@ ARG         LIBRETLS_VERSION="3.8.1-r0"
 ARG         CARGO_VERSION="1.91.1-r0"
 # renovate: datasource=repology depName=alpine_3_23/fuse3 versioning=loose
 ARG         FUSE3_VERSION="3.17.3-r1"
+# renovate: datasource=repology depName=alpine_3_23/cmake versioning=loose
+ARG         CMAKE_VERSION="4.1.3-r0"
 
 ARG         TARGETPLATFORM
 
@@ -33,6 +35,7 @@ RUN         --mount=type=cache,sharing=locked,target=/root/.cache,id=home-cache-
               libretls-dev=${LIBRETLS_VERSION} \
               fuse3-dev=${FUSE3_VERSION} \
               cargo=${CARGO_VERSION} \
+              cmake=${CMAKE_VERSION} \
             && \
             pip install -r requirements.txt && \
             apk del .build-deps && \
