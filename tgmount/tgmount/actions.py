@@ -5,7 +5,7 @@ from typing import List
 
 import aiohttp
 import pyfuse3
-import pyfuse3_asyncio
+import pyfuse3.asyncio
 from telethon import events
 from telethon.hints import Entity
 from telethon.tl import types
@@ -128,7 +128,7 @@ def create_new_files_handler(client: TelegramFsClient, telegram_fs, entity: Enti
 async def mount(client, id, destination: str, offset_id=0, limit=None,
                 filter_music=False, debug_fuse=False, reverse=False, updates=False, fsname="tgfs",
                 additional_fuse_options=None, new_file_webhook_urls=None):
-    pyfuse3_asyncio.enable()
+    pyfuse3.asyncio.enable()
     fuse_options = set(pyfuse3.default_options)
     if additional_fuse_options is not None:
         fuse_options.update(additional_fuse_options)
