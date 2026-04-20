@@ -1,4 +1,4 @@
-telethon==1.43.1
+telethon==1.43.2
 cryptg==0.6.0
 pysocks==1.7.1
 funcy==2.0.0
