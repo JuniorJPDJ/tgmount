@@ -1,3 +1,4 @@
+import asyncio
 import dataclasses
 import json
 import logging
@@ -118,9 +119,15 @@ def create_new_files_handler(client: TelegramFsClient, telegram_fs, entity: Enti
             logging.debug(f'webhook data: {data}')
 
             async with aiohttp.ClientSession() as sess:
-                for new_file_webhook_url in new_file_webhook_urls:
-                    async with sess.post(new_file_webhook_url, json=data) as resp:
-                        logging.debug(f'new file hook response code: {resp.status}')
+                async def _webhook_helper(sess, url, data):
+                    try:
+                        async with sess.post(url, json=data) as resp:
+                            await resp.read()
+                            logging.debug(f'webhook response code for {url}: {resp.status}')
+                    except Exception as e:
+                        logging.error(f'Webhook failed for {url}: {e}')
+
+                await asyncio.gather(*[_webhook_helper(sess, url, data) for url in new_file_webhook_urls])
 
     return new_files_handler
 
