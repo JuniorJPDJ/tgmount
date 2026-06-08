@@ -3,5 +3,5 @@ cryptg==0.6.0
 pysocks==1.7.1
 funcy==2.0.0
 pyfuse3==3.4.2
-tqdm==4.67.3
+tqdm==4.68.1
 aiohttp[speedups]==3.14.1
