@@ -11,7 +11,7 @@ ARG         LIBRETLS_VERSION="3.8.1-r0"
 # renovate: datasource=repology depName=alpine_3_24/cargo versioning=loose
 ARG         CARGO_VERSION="1.96.1-r0"
 # renovate: datasource=repology depName=alpine_3_24/fuse3 versioning=loose
-ARG         FUSE3_VERSION="3.18.2-r0"
+ARG         FUSE3_VERSION="3.18.3-r0"
 # renovate: datasource=repology depName=alpine_3_24/cmake versioning=loose
 ARG         CMAKE_VERSION="4.2.3-r0"
 
