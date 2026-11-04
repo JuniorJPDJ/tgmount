@@ -1,5 +1,5 @@
 telethon==1.45.0
-cryptg==0.6.0
+cryptg==0.6.1
 pysocks==1.7.1
 funcy==2.1
 pyfuse3==3.5.0
